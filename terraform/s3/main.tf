@@ -20,9 +20,8 @@ resource "aws_s3_bucket" "example" {
   force_destroy = true
 
   tags = {
-    NAME        = "my bucket"
-    BSID        = "bus0149"
-    CONTRACTOR  = "qijun yang"
-    PURPOSE     = "test only, feel free to remove"
+    SERVICEID   = "ts01472"
+    ENVIRONMENT = "qa"
+    FUNCTION    = "app"
   }
 }
