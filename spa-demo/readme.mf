@@ -1,0 +1,28 @@
+this is a web application with aws infra setup
+
+
+example of s3 permission
+
+{
+    "Version": "2012-10-17",
+    "Id": "PolicyForCloudfrontPrivateContent",
+    "Statement": [
+        {
+            "Sid": "AllowCloudfrontPrincipal",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudfront.amazonaws.com"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::s3-spademo-public-qa/*",
+            "Condition": {
+                "StringEquals": {
+                    "AWS:SourceArn": "arn:aws:cloudfront::381492177645:distribution/E2C2EBAKQNKQAK"
+                }
+            }
+        }
+    ]
+}
+
+cloudfront needs
+origin access
