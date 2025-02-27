@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.Matchers.is;
 
 @WebMvcTest(AppMetaController.class)
-public class AppMetaControllerTests {
+public class AppMetaControllerUnitTests {
     @Autowired
     private MockMvc mockMvc;
 
@@ -35,14 +35,14 @@ public class AppMetaControllerTests {
     public void testGetApplicationMeta() throws  Exception {
         // Mock data returned by service
         Map<String, String> mockData = new HashMap<String, String>() {{
-            put("name", "app name");
+            put("name", "springdemo");
             put("version", "1.1");
         }};
         when(appMetaService.getMeta()).thenReturn(mockData);
 
         mockMvc.perform(get("/application/meta"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", is("app name")))
+                .andExpect(jsonPath("$.name", is("springdemo")))
                 .andExpect(jsonPath("$.version", is("1.1")));
     }
 }
