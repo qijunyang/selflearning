@@ -11,10 +11,4 @@ public class HomeController {
     public String index() {
         return "index.html";
     }
-
-
-    @RequestMapping("/app-name")
-    public String[] getAppName() {
-        return new String[] {"app names"};
-    }
 }

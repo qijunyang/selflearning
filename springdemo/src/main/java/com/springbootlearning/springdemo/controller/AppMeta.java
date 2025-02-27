@@ -13,12 +13,12 @@ public class AppMeta {
     @Value("${spring.application.version}")
     private String appVersion;
 
-    @GetMapping("/app-name")
+    @GetMapping("/application/name")
     public String[] getAppName() {
         return new String[] {appName};
     }
 
-    @GetMapping("/version")
+    @GetMapping("/application/version")
     public  String[] getVersion() {
         return new String[] {appVersion};
     }
