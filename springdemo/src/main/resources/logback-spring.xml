@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <springProperty name="serviceName" source="spring.application.name"/>
+    <springProperty name="env" source="spring.profiles.active"/>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>myApp.log</file>
+        <encoder>
+            <pattern>%d{"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",UTC} %-5level env="${env}" service_name="${serviceName}" thread="%thread" mdc_key="%X{mdc_key}" class="%logger{50}" %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="API_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",UTC} %-5level env="${env}" service_name="${serviceName}" thread="%thread" mdc_key="%X{mdc_key}" class="%logger{50}" %msg %n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="FRAMEWORK_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",UTC} %-5level env="${env}" service_name="${serviceName}" thread="%thread" mdc_key="%X{mdc_key}" class="%logger{50}" %msg %n</pattern>
+        </layout>
+    </appender>
+
+    <springProfile name="dev | qa | stg">
+        <root level="INFO">
+            <appender-ref ref="FRAMEWORK_CONSOLE"/>
+        </root>
+        <logger name="com.springbootlearning.springdemo" additivity="false" level="DEBUG">
+            <appender-ref ref="API_CONSOLE"/>
+            <appender-ref ref="FILE"/>
+        </logger>
+    </springProfile>
+
+    <springProfile name="uat | prod | prod-dr">
+        <root level="INFO">
+            <appender-ref ref="FRAMEWORK_CONSOLE"/>
+        </root>
+        <logger name="com.springbootlearning.springdemo" additivity="false" level="INFO">
+            <appender-ref ref="API_CONSOLE"/>
+        </logger>
+    </springProfile>
+</configuration>

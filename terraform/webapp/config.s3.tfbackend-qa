@@ -1,0 +1,3 @@
+region  = "us-east-1"
+bucket  = "webapp-terraform-state-qa-us-east-1"
+key     = "qa/webapp/tf-wp.tfstate"
